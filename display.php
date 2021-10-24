@@ -1,3 +1,7 @@
+<?php 
+include 'connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +12,46 @@
     <title>Projeto Crud</title>
 </head>
 <body>
+    <div class="container"> 
+        <button class="btn btn-secondary my-5" ><a class="text-light" style="text-decoration: none;" href="user.php">Adicionar Usuário</a></button>
+
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Sobrenome</th>
+      <th scope="col">Operações</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php
+        $sql = "SELECT * FROM pessoa";
+        $result=mysqli_query($connect,$sql);
+        if($result){
+            while($row=mysqli_fetch_assoc($result)){
+                $id=$row['id'];
+                $nome=$row['nome'];
+                $sobrenome=$row['sobrenome'];
+                echo' 
+                <tr>
+                  <th class="table-secondary" scope="row">'.$id.'</th>
+                  <td>'.$nome.'</td>
+                  <td>'.$sobrenome.'</td>
+                  <td>
+                    <button class="btn btn-primary" ><a class="text-light" style="text-decoration: none;"href="update.php?upid='.$id.'">EDITAR</a></button>
+                    <button class="btn btn-danger""><a  class="text-light" style="text-decoration: none;"href="delete.php?delid='.$id.'">REMOVER</a></button>
+                </td>
+                </tr>';
+            }
+        }
+
+
+    ?>
     
+    
+  </tbody>
+</table>
+    </div>
 </body>
 </html>
